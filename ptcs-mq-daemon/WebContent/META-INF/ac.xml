@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/ac"
+   reloadable="false"
+ crossContext="true">
+  <Resource name="jdbc/ext"
+	        auth="Container"
+	        type="javax.sql.DataSource"
+ driverClassName="oracle.jdbc.driver.OracleDriver"
+             url="jdbc:oracle:thin:@192.168.1.11:1521:hmitdevdb1"
+	    username="ext"
+        password="ext"
+     initialSize="2"
+	   maxActive="20"
+	     maxIdle="2"
+         minIdle="1"
+	     maxWait="5000"
+    testOnBorrow="true"
+   testWhileIdle="true"
+ validationQuery="select 1 from dual" />
+
+  <Resource name="jdbc/tvss"
+	        auth="Container"
+	        type="javax.sql.DataSource"
+ driverClassName="oracle.jdbc.driver.OracleDriver"
+             url="jdbc:oracle:thin:@192.168.1.11:1521:hmitdevdb1"
+	    username="tvss"
+        password="tvss"
+     initialSize="2"
+	   maxActive="20"
+	     maxIdle="2"
+         minIdle="1"
+	     maxWait="5000"
+    testOnBorrow="true"
+   testWhileIdle="true"
+ validationQuery="select 1 from dual" />
+</Context>

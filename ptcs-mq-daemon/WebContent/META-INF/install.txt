@@ -1,0 +1,32 @@
+安装向导
+----------
+1、可安装在Windows、Linux等操作系统上，以Linux下安装部署为例
+     使用root用户新增tvss用户，主目录/home/tvss
+2、安装jdk1.7.0及更高版本，安装完成后将配置环境变量如下：
+     JAVA_HOME=/home/tvss/java
+     export JAVA_HOME
+     PATH=$PATH:$JAVA_HOME/bin
+3、安装Tomcat 7.x及更高版本，安装完成后将配置环境变量如下：
+     TOMCAT_HOME=/home/tvss/tomcat
+     export TOMCAT_HOME
+     PATH=$PATH:$TOMCAT_HOME/bin
+4、设置Tomcat启动参数
+     修改$TOMCAT_HOME/bin/catalina.sh文件，在#JAVA_OPTS后面添加启动参数如下：
+     JAVA_OPTS="$JAVA_OPTS -Xms1024M -Xmx1024M -server -XX:PermSize=128M -XX:MaxPermSize=256M"
+     JAVA_OPTS="$JAVA_OPTS -Dftp.home=/home/ftpuser -Dase.home=/home/ftpuser/ase"
+     （说明：/home/ftpuser为文件共享目录，/home/ftpuser/ase为获取或生成文件存放目录）
+5、配置数据源
+     在$TOMCAT_HOME/conf下新增Catalina/localhost层级目录结构
+     添加连接数据库驱动的JAR文件至$TOMCAT_HOME/bin目录下，oracle为ojdbc6.jar
+     将install.txt同目录下${appName}.xml文件拷贝到$TOMCAT_HOME/conf/Catalina/localhost目录下
+     修改文件内容，设置连接数据库相关信息
+6、部署应用程序
+     打包前修改配置文件中属性参数值
+     classpath:econf/spring/props/hibernate.properties文件hibernate.show_sql=true
+     classpath:log4j.properties文件log4j.rootLogger=INFO, dailyRollingFile
+     classpath:app-pg-tvss.properties文件生产FTP信息
+     将打包xxx.war包拷贝到$TOMCAT_HOME/webapps目录下
+7、启动Tomcat
+     startup.sh
+8、停止Tomcat
+     shutdown.sh

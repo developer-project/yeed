@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:jee="http://www.springframework.org/schema/jee"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="
+	       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+	       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+	   default-autowire="byName" default-lazy-init="false">
+	<description>Application Context Java Mail Configure</description>
+	
+	<!-- Configure JavaMail -->
+	<!--
+	<bean id="mailSession" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="mail/session" />
+		<property name="resourceRef" value="true" />
+	</bean>
+	-->
+	
+	<bean id="mailService" class="eins.framework.mail.MailService">
+		<property name="hostname" value="${mail.smtp.host}" />
+		<property name="port" value="${mail.port}" />
+		<property name="auth" value="${mail.smtp.auth}" />
+		<property name="username" value="${mail.username}" />
+		<property name="password" value="${mail.password}" />
+		<property name="charsetName" value="${mail.charsetName}" />
+		<property name="fromEmailAddr" value="${mail.fromEmailAddr}" />
+		<property name="fromAliasName" value="${mail.fromAliasName}" />
+	</bean>
+	
+	<!-- email address -->
+	<bean id="emailAddressListAbstract" abstract="true">
+	  <property name="emailAddressList">
+	    <list>
+	      <bean class="eins.framework.mail.MailBean">
+	        <property name="aliasName" value="LK" />
+	        <property name="emailAddr" value="ke.li@hmit.com.cn" />
+	      </bean>
+	    </list>
+	  </property>
+	</bean>
+</beans>
